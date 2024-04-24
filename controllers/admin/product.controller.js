@@ -1,3 +1,4 @@
+
 const Product = require("../../models/product.model")
 
 const systemConfig = require("../../config/system.js")
@@ -40,8 +41,17 @@ module.exports.index = async (req, res) => {
     );
     // End Pagination
 
+    // Sort 
+    let sort = {};
 
-    const products = await Product.find(find).sort({position: "desc"}).limit(objectPagination.limitItem).skip(objectPagination.skip);
+    if(req.query.sortKey && req.query.sortValue){
+        sort[req.query.sortKey] = req.query.sortValue;
+    }else {
+        sort.position = "desc";
+    }
+    // End Sort 
+
+    const products = await Product.find(find).sort(sort).limit(objectPagination.limitItem).skip(objectPagination.skip);
     // console.log(products)
 
     res.render("admin/pages/products/index", {
