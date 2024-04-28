@@ -153,9 +153,9 @@ module.exports.createPost = async (req, res) => {
         req.body.position = parseInt(req.body.position);
     }
 
-    if(req.file){
-        req.body.thumbnail = `/uploads/${req.file.filename}`;
-    }
+    // if(req.file){
+    //     req.body.thumbnail = `/uploads/${req.file.filename}`;
+    // }
 
     const product = new Product(req.body);
     await product.save();
@@ -183,6 +183,7 @@ module.exports.edit = async (req, res) => {
     } catch (error) {
         res.redirect(`${systemConfig.prefixAdmin}/products`);
     }
+    // res.redirect(`${systemConfig.prefixAdmin}/products`);
     
 }
 
