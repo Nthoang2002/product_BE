@@ -1,20 +1,7 @@
 const express = require("express");
-// const cloudinary = require('cloudinary').v2;
-// const streamifier = require('streamifier');
 
 const router = express.Router();
 const multer = require('multer');
-
-
-
-// Cloudinary
-
-// cloudinary.config({
-//   cloud_name: 'dhhnqzous',
-//   api_key: '596546823921375',
-//   api_secret: 'F7VnPFAcx_rPoArw2OxoIS46u0o'
-// });
-// // End Cloudinary
 
 
 const upload = multer();
@@ -33,8 +20,8 @@ router.patch("/change-multi", controller.changeMulti);
 
 router.delete("/delete/:id", controller.deleteItem);
 
+//create-products
 router.get("/create", controller.create);
-
 router.post(
   "/create",
   upload.single('thumbnail'),
@@ -42,9 +29,10 @@ router.post(
   validate.createPost,
   controller.createPost
 );
+//End create-products
 
+//edit-products
 router.get("/edit/:id", controller.edit);
-
 router.patch(
   "/edit/:id",
   upload.single('thumbnail'),
@@ -52,6 +40,8 @@ router.patch(
   validate.createPost,
   controller.editPatch
 );
+//End edit-products
+
 
 router.get("/detail/:id", controller.detail);
 
